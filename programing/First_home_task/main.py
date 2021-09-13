@@ -1,10 +1,19 @@
 our_arr = []
-count_of_elements = int(input("Your_count of elements: "))
+def enter_count_of_elem():
+    try:
+        count_of_elements = int(input("number: "))
+    except:
+        print("please enter number:")
+        return enter_count_of_elem()
+    return count_of_elements
+
+count_of_elements = enter_count_of_elem()
+
 def input_our_arr(count_of_elements , our_arr):
     index = 0
     our_element = 0
     while index < count_of_elements:
-        our_element = int(input('your num: '))
+        our_element = enter_count_of_elem()
         our_arr.append(our_element)
         index += 1
 
