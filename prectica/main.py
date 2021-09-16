@@ -23,13 +23,13 @@ def check_k():
         k = input_num()
     return k
 
-k = 0
-n = 0
 
-while n+k <= 4 or n+k >= 10:
-    k = check_k()
-    n = check_n()
+def check_n_and_k(k = 0 , n = 0):
+    while n+k <= 4 or n+k >= 10:
+        k = check_k()
+        n = check_n()
 
+check_n_and_k()
 
 
 def apply_k(k):#all avaluable value
