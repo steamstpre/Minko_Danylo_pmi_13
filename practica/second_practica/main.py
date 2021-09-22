@@ -84,6 +84,9 @@ def display_res(our_matrix , arr_of_operation):
     display_arr(sort_arr)
     print("count of operation:")
     return_count_of_operation(arr_of_operation)
+    arr_of_operation = []
+    res = print_hello()
+    return res
 
 def start_of_program():
     res = print_hello()
@@ -96,16 +99,12 @@ def start_of_program():
             print("size: ")
             n = input_number()
             our_matrix = apply_arr_by_diapazon(n)
-            display_res(our_matrix , arr_of_operation)
-            res = print_hello()
-            arr_of_operation = []
+            res = display_res(our_matrix , arr_of_operation)
         if res == 2:
             print("size: ")
             n = input_number()
             our_matrix = apply_arr_by_key(n)
-            display_res(our_matrix , arr_of_operation)
-            res = print_hello()
-            arr_of_operation = []
+            res = display_res(our_matrix , arr_of_operation)
         else:
             print("please try num 1 2 3")
 
