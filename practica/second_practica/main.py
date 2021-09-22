@@ -76,6 +76,15 @@ def print_hello():
     res = input_number()
     return res
 
+def display_res(our_matrix , arr_of_operation):
+    print("your arr: ")
+    display_arr(our_matrix)
+    sort_arr = merge_sort(our_matrix, arr_of_operation)
+    print("sorted arr")
+    display_arr(sort_arr)
+    print("count of operation:")
+    return_count_of_operation(arr_of_operation)
+
 def start_of_program():
     res = print_hello()
     while True:
@@ -87,24 +96,14 @@ def start_of_program():
             print("size: ")
             n = input_number()
             our_matrix = apply_arr_by_diapazon(n)
-            print("your arr: ")
-            display_arr(our_matrix)
-            sort_arr = merge_sort(our_matrix , arr_of_operation)
-            print("sorted arr")
-            display_arr(sort_arr)
-            print("count of operation:")
-            return_count_of_operation(arr_of_operation)
+            display_res(our_matrix , arr_of_operation)
             res = print_hello()
             arr_of_operation = []
         if res == 2:
             print("size: ")
             n = input_number()
             our_matrix = apply_arr_by_key(n)
-            sort_arr = merge_sort(our_matrix , arr_of_operation)
-            print("sorted arr")
-            display_arr(sort_arr)
-            print("count of operation:")
-            return_count_of_operation(arr_of_operation)
+            display_res(our_matrix , arr_of_operation)
             res = print_hello()
             arr_of_operation = []
         else:

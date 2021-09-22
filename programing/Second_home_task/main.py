@@ -36,15 +36,37 @@ def detect_element(matrix , n , m):
                 count_of_search_elem += 1
     #print(count_of_search_elem)
     return count_of_search_elem
+def print_hello():
+    print("Hello , input type of applying 1 apapply_matrix ,  2 exit ")
+    res = input_num()
+    return res
 
 
+def menu():
+    res = print_hello()
+    while True:
+        if res == 2:
+            print("exit")
+            break
+        if res == 1:
+            n = input_num()
+            m = input_num()
+            our_matrix = input_matrix(n, m)
+            our_res = detect_element(our_matrix, n, m)
+            print("count of search elements:")
+            print(our_res)
+            res = print_hello()
+        else:
+            print("please try num 1 2")
 
-n = input_num()
-m = input_num()
-our_matrix =  input_matrix(n , m)
-our_res = detect_element(our_matrix , n , m)
-print("count of search elements:")
-print(our_res)
+menu()
+
+# n = input_num()
+# m = input_num()
+# our_matrix =  input_matrix(n , m)
+# our_res = detect_element(our_matrix , n , m)
+# print("count of search elements:")
+# print(our_res)
 # for i in range(n):
 #     for j in range(m):
 #         print(our_matrix[i][j])
