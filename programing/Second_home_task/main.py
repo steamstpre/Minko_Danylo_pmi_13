@@ -50,7 +50,11 @@ def menu():
             break
         if res == 1:
             n = input_num()
+            if(n < 0):
+                n = input_num()
             m = input_num()
+            if (m < 0):
+                m = input_num()
             our_matrix = input_matrix(n, m)
             our_res = detect_element(our_matrix, n, m)
             print("count of search elements:")
@@ -58,6 +62,7 @@ def menu():
             res = print_hello()
         else:
             print("please try num 1 2")
+            res = print_hello()
 
 menu()
 

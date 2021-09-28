@@ -98,14 +98,19 @@ def start_of_program():
         if res == 1:
             print("size: ")
             n = input_number()
+            if  n < 0:
+                n = input_number()
             our_matrix = apply_arr_by_diapazon(n)
             res = display_res(our_matrix , arr_of_operation)
         if res == 2:
             print("size: ")
             n = input_number()
+            if  n < 0:
+                n = input_number()
             our_matrix = apply_arr_by_key(n)
             res = display_res(our_matrix , arr_of_operation)
         else:
             print("please try num 1 2 3")
+            res = print_hello()
 
 start_of_program()
