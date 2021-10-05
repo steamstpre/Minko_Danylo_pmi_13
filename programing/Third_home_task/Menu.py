@@ -36,13 +36,25 @@ def menu():
     if operation == 7:
             print("exit")
             break
+<<<<<<< Updated upstream
     else:
         print("try corrcet num")
         operation = print_option()
+=======
+<<<<<<< Updated upstream
+=======
+    else:
+        print("try corrcet num")
+        
+>>>>>>> Stashed changes
 
 
 
 
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 
 
