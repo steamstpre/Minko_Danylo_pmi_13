@@ -2,8 +2,8 @@ import Validation
 from Validation import *
 from Collection import Collection
 from TAX_FREE import Tax_free
-import Sort_by_date
-import Search
+
+
 
 our_path = "data_base.json"
 
@@ -25,11 +25,9 @@ def menu():
     if operation == 2:
             our_collection.input_to_obj(our_path)
     if operation == 3:
-           sorted_arr = our_collection.sort(our_collection.input_field())
-           Sort_by_date.print_arr(sorted_arr)
+           sorted_arr = our_collection.sort()
     if operation == 4:
             serch_arr = our_collection.search()
-            Sort_by_date.print_arr(serch_arr)
     if operation == 5:
             our_collection.edit_elem(our_path)
     if operation == 6:

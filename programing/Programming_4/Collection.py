@@ -1,8 +1,7 @@
 import json
-import Search
-import Sort_by_date
 import Validation
 from TAX_FREE import Tax_free
+from Const import Const
 
 class Collection(object):
 
@@ -25,30 +24,44 @@ class Collection(object):
         self.our_list.append(item)
 
     def sort(self , parametr="field"):
-        if parametr == "_date_of_purchase" or parametr == "_date_of_tax_ref":
-            sorted_list = Sort_by_date.sort_by_date_of_purchase(self.our_list)
-        else:
-            sotred_list = sorted(self.our_list , key=lambda x: str(getattr(Tax_free , parametr)).lower())
-        return sotred_list
+        parametr = input("field:")
+        try:
+            sotred_list = sorted(self.our_list, key=lambda x: str(getattr(Tax_free, parametr)).lower())
+            return sotred_list
+        except:
+            print("wrong field")
 
     def search(self):
         print("our search_elem:")
-        elem = input("elem:")
-        res =  Search.search(self.our_list , search_elem=elem)
-        return res
+        search_elem = input("elem:")
+        length = len(self.our_list)
+        temp_arr = self.our_list
+        res_arr = []
+        for i in range(length):
+            if (temp_arr[i].id == search_elem or temp_arr[i].date_of_purchase == search_elem or temp_arr[
+                i].company == search_elem or temp_arr[i].country == search_elem or temp_arr[
+                    i].date_of_tax_ref == search_elem or temp_arr[i].vat_code == search_elem or temp_arr[
+                    i].vat_rate == search_elem) and i < length:
+                res_arr.append(temp_arr[i])
+        return res_arr
 
     def read_json(self , path):
-        try:
+         try:
             file_ = open(path , encoding="utf-8")
             file = json.load(file_)
             for i , item in enumerate(file):
                 try:
-                    self.our_list.append(Tax_free(**item))
+                    our_obj = Tax_free()
+                    our_obj.set_from_file(**item)
+                    self.append(our_obj)
                 except ValueError:
-                    print("error")
+                    print("value errorr")
+                    continue
+                except AttributeError:
+                    print("wrong atribute")
                     continue
             file_.close()
-        except:
+         except:
             print("not correct data")
 
     def write_to_json(self , path):
@@ -56,84 +69,36 @@ class Collection(object):
             json.dump([obj.__dict__ for obj in self.our_list], our_file , ensure_ascii=False)
         our_file.close()
 
-
     def input_to_obj(self , path):
         our_obj = Tax_free()
-        print("id: ")
-        id = Validation.check_num_menu()
-        our_obj.id = id
-        company_name = str(input("your name: "))
-        our_obj.company = company_name
-        country  = str(input("your country: "))
-        our_obj.country = country
-        vat_rate = input("var rate")
-        our_obj.vat_rate = vat_rate
-        date_of_purchase = str(input("your date of purchase: "))
-        our_obj.date_of_purchase = date_of_purchase
-        vat_code = input("vat code:")
-        our_obj.vat_code = vat_code
-        date_of_tax_ref = input("date of tax ref:")
-        our_obj.date_of_tax_ref = date_of_tax_ref
+        try:
+            count_of_fileds = int(input("count of fileds: "))
+            if count_of_fileds > Const.CONST_SEVEN:
+                raise ValueError
+            for i in range(count_of_fileds):
+                field = input("your field: ")
+                value = input("your value: ")
+                setattr(our_obj, field, value)
+        except:
+            print("wrong value")
         self.append(our_obj)
         self.write_to_json(path)
 
-    @staticmethod
-    def input_field():
-        print("please choose fieild: 1 id , 2 comapny , 3 country , 4 vat rate , 5 date of purchase , 6 vat code , 7 date of tax ref")
-        our_operation = Validation.check_num_menu()
-        while True:
-            if our_operation == 1:
-                return "id"
-            if our_operation == 2:
-                return "company"
-            if our_operation == 3:
-                return "country"
-            if our_operation == 4:
-                return "vat_rate"
-            if our_operation == 5:
-                return "date_of_purchase"
-            if our_operation == 6:
-                return "vat_code"
-            if our_operation == 7:
-                return "date_of_tax_ref"
-            else:
-                print("please try 1-7")
-                our_operation = Validation.check_num_menu()
+    def delete(self):
+        id = input("your id: ")
+        for i in self.our_list:
+            if i._id == id:
+                self.our_list.remove(i)
 
-    def delete_obj(self , obj):
-        self.our_list.remove(obj)
-
-    def delete_elem_from_menu(self , path):
-        arr_of_search_element = self.search()
-        print("enter index of elelm")
-        index = Validation.check_num_menu()
-        while True:
-            if index < len(arr_of_search_element):
-                print(arr_of_search_element[index])
-                self.our_list.remove(arr_of_search_element[index])
-                self.write_to_json(path)
-                break
-            else:
-                print("try correct index")
-                index = Validation.check_num_menu()
-
-    def edit_elem(self , path):
-        arr_of_search_element = self.search()
-        Sort_by_date.print_arr(arr_of_search_element)
-        print("enter index of elelm")
-        index = Validation.check_num_menu()
-        while True:
-            if index < len(arr_of_search_element):
-                print(arr_of_search_element[index])
-                self.our_list.remove(arr_of_search_element[index])
-                res = self.input_field()
-                new_filed = input("new parametr:")
-                setattr(arr_of_search_element[index] , res , new_filed)
-                self.our_list.append(arr_of_search_element[index])
-                self.write_to_json(path)
-                break
-            else:
-                print("try correct index")
-                index = Validation.check_num_menu()
+    def edit(self):
+        id = input("your id: ")
+        try:
+            for i in self.our_list:
+                if i._id == id:
+                    attr = input("your field: ")
+                    value = input("new value: ")
+                    setattr(i, attr, value)
+        except:
+            print("smth wrong")
 
 
