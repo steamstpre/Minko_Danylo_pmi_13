@@ -68,3 +68,4 @@ def check_data(data):
 def check_vat_code(code):
     if code[:Const.CONST_TWO] == "VA" and check_num(code[Const.CONST_THREE:Const.CONST_SIX], code[Const.CONST_SEVEN:Const.CONST_NINE] , code[Const.CONST_TEN:]) and code[Const.CONST_TWO] == "-" and code[Const.CONST_SIX] == "-" and code[Const.CONST_NINE] == "-":
         return True
+

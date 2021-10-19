@@ -1,15 +1,11 @@
 import Validation
 import json
 
+
 class Tax_free(object):
-    def __init__(self , id_input = "0" , company_input  = "none" , country_input = "none" , vat_rate_input = "0"  , date_of_purchase_input = "01.02.2020", vat_code_input = "VA123-12-123" ,  date_of_tax_ref_input="01.02.2020"):
-        self.id = id_input
-        self.company = company_input
-        self.country = country_input
-        self.vat_rate = vat_rate_input
-        self.date_of_purchase = date_of_purchase_input
-        self.vat_code = vat_code_input
-        self.date_of_tax_ref = date_of_tax_ref_input
+    def __init__(self , **arr ):#id_input = "0" , company_input  = "none" , country_input = "none" , vat_rate_input = "0"  , date_of_purchase_input = "01.02.2020", vat_code_input = "VA123-12-123" ,  date_of_tax_ref_input="01.02.2020"):
+        for (prop, default) in arr.items():
+            setattr(self, prop, arr.get(prop, default))
 
     @property
     def id(self):
@@ -97,7 +93,7 @@ class Tax_free(object):
         self._id = value
 
     def __str__(self):
-        print(self._id , self._company , self._vat_rate , self._country , self._date_of_purchase , self._vat_code , self._date_of_tax_ref)
+        print(self.id , self.company , self.vat_rate, self.country , self.date_of_purchase , self.vat_code , self.date_of_tax_ref)
         return "0"
 
     def __eq__(self, second_object):
