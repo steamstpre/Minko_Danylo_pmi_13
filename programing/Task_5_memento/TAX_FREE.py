@@ -84,9 +84,14 @@ class Tax_free(object):
         for (field, value) in arr.items():
             setattr(self, field, value)
 
+    def __get_dictionary(self):
+        return dict((name, getattr(self, name)) for name in dir(self) if
+                     not name.startswith('_'))
+
     def __str__(self):
-        print(self.id , self.company , self.vat_rate, self.country , self.date_of_purchase , self.vat_code , self.date_of_tax_ref)
-        return "0"
+        return "Company:" + '\n'.join("%s : %r" % (key, str(val)) for (key, val)
+                                        in self.__get_dictionary().items()) + " "
+
 
 
 

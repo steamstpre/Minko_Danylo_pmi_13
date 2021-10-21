@@ -37,18 +37,10 @@ class Collection(object):
             print("wrong field")
 
     def search(self):
-        print("our search_elem:")
-        search_elem = input("elem:")
-        length = len(self.our_list)
-        temp_arr = self.our_list
-        res_arr = []
-        for i in range(length):
-            if (temp_arr[i].id == search_elem or temp_arr[i].date_of_purchase == search_elem or temp_arr[
-                i].company == search_elem or temp_arr[i].country == search_elem or temp_arr[
-                    i].date_of_tax_ref == search_elem or temp_arr[i].vat_code == search_elem or temp_arr[
-                    i].vat_rate == search_elem) and i < length:
-                res_arr.append(temp_arr[i])
+        our_elem = input("search eleme")
+        res_arr = list(filter(lambda x: any(our_elem in str(s) for s in x.__dict__.values()), self.our_list))
         return res_arr
+
 
     def read_json(self , path):
          try:
