@@ -1,6 +1,7 @@
 import Validation
 from Strategy import Strategy , Strategy_one , Strategy_two
 from Linked_list import LinkedList
+from Context import Context
 
 
 def message():
@@ -8,18 +9,19 @@ def message():
     operation = Validation.enter_num()
     return operation
 
+def strategy_input(operation , our_list , context):
+    context.operation = operation
+    context.choose_strategy(our_list)
+
 def menu():
     operation = message()
     our_list = LinkedList()
-    strategy_one = Strategy_one()
-    strategy_two = Strategy_two
+    context = Context()
     while True:
         if operation == 1:
-            pos = Validation.enter_num()
-            strategy_one.generate_data(our_list , pos)
+            strategy_input(operation , our_list , context)
         if operation == 2:
-            pos = Validation.enter_num()
-            strategy_two.generate_data(our_list , pos)
+            strategy_input(operation, our_list, context)
         if operation == 3:
             our_elem = Validation.enter_num()
             our_list.delete_elem(our_elem)
