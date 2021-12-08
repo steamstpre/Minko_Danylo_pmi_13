@@ -23,4 +23,6 @@ urlpatterns = [
     path('api/v1/tax/', include('taxfree.urls')),
     path('', schema_view.with_ui('swagger', cache_timeout=None), name='schema-swagger-ui'),
     path('redo/c', schema_view.with_ui('redoc', cache_timeout=None), name='schema-redoc'),
+    path('api/v1/auth', include('djoser.urls')),
+    path('api/v1/auth_token', include('djoser.urls.authtoken')),
 ]
